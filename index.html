@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor - Feliz Dia dos Namorados</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+</head>
+
+<!-- Adicione isso antes do </body> -->
+<script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+<script>
+    // Pétalas caindo
+    const petalContainer = document.createElement('div');
+    petalContainer.id = 'petals';
+    document.body.appendChild(petalContainer);
+
+    for (let i = 0; i < 15; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5D0E07"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>';
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.animationDuration = `${5 + Math.random() * 10}s`;
+        petalContainer.appendChild(petal);
+    }
+</script>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Para o meu <br>amor</h1>
+            <p>You are my love</p>
+        </div>
+    </header>
+
+    <section id="counter">
+        <div class="container">
+            <h2>Nosso Tempo Juntas</h2>
+            <div class="counter">
+                <div class="counter-display" id="timeTogether">0 dias, 0 horas, 0 minutos, 0 segundos</div>
+                <div class="counter-label">
+                    <span>Dias</span>
+                    <span>Horas</span>
+                    <span>Minutos</span>
+                    <span>Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Nossas Memórias</h2>
+            <div class="photo-gallery" id="photoGallery">
+                <!-- Fotos serão adicionadas aqui via JavaScript ou manualmente -->
+            </div>
+        </div>
+    </section>
+
+    <section id="game">
+        <div class="container">
+            <h2>Jogo da Memória do Nosso Amor</h2>
+            <div class="memory-game">
+                <div class="game-board" id="gameBoard">
+                    <!-- Cartas serão geradas via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="letter">
+        <div class="container">
+            <h2>Minha Carta Para Você</h2>
+            <div class="carta">
+                <img src="carta.png" alt="minha carta">
+            </div>
+        </div>
+    </section>
+
+    <section id="playlist">
+        <div class="container">
+            <h2>Nossa Playlist</h2>
+            <div class="playlist" id="songList">
+                <!-- Músicas serão adicionadas aqui -->
+            </div>
+            <a href="https://open.spotify.com/playlist/12XKtWZFZUsOzVPzBPJ1nU?si=D6z6aUsQSCOoBGw6ties2A"><button
+                    type="button" class="button">
+                    <div class="button-top">Escute nossa playlist</div>
+                    <div class="button-bottom"></div>
+                    <div class="button-base"></div>
+                </button></a>
+
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Feito com ❤ para você, meu amor</p>
+        </div>
+    </footer>
+
+    <script>
+        // Contador de tempo juntos
+        const startDate = new Date('2024-07-18T00:00:00');
+
+        function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // Versão para desktop
+    const desktopText = `${days} dias, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+    
+    // Versão para mobile
+    const mobileText = `
+        <span>${days} dias</span>
+        <span>${hours} horas</span>
+        <span>${minutes} minutos</span>
+        <span>${seconds} segundos</span>
+    `;
+    
+    const counter = document.getElementById('timeTogether');
+    if (window.innerWidth <= 480) {
+        counter.innerHTML = mobileText;
+        counter.style.display = 'flex';
+        counter.style.flexDirection = 'column';
+        counter.style.gap = '0.3rem';
+    } else {
+        counter.textContent = desktopText;
+        counter.style.display = 'block';
+    }
+}
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // Galeria de fotos
+        const photoGallery = document.getElementById('photoGallery');
+
+        // Fotos de exemplo (substitua por suas próprias fotos)
+        const samplePhotos = [
+            'foto1.jpeg',
+            'foto4.jpeg',
+            'foto8.jpeg',
+            'foto5.jpeg',
+            'foto6.jpeg',
+            'foto9.jpeg'
+        ];
+
+        // Substitua a função loadPhotos() por:
+        function loadPhotos() {
+            samplePhotos.forEach(photoUrl => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `<img src="${photoUrl}" alt="Nossa foto">`;
+                photoItem.addEventListener('click', () => {
+                    const lightbox = document.createElement('div');
+                    lightbox.className = 'lightbox';
+                    lightbox.innerHTML = `
+                <img src="${photoUrl}" alt="Nossa foto">
+                <span class="close">&times;</span>
+            `;
+                    document.body.appendChild(lightbox);
+                    lightbox.querySelector('.close').addEventListener('click', () => lightbox.remove());
+                });
+                photoGallery.appendChild(photoItem);
+            });
+        }
+
+        function addPhotoToGallery(photoUrl) {
+            const photoItem = document.createElement('div');
+            photoItem.className = 'photo-item';
+            photoItem.innerHTML = `<img src="${photoUrl}" alt="Nossa foto">`;
+            photoGallery.appendChild(photoItem);
+        }
+
+        loadPhotos();
+
+        // Jogo da memória com fotos
+        const gameBoard = document.getElementById('gameBoard');
+
+        // URLs das fotos para o jogo (use 4 fotos diferentes, cada uma aparecerá duas vezes)
+        const memoryPhotos = [
+            'jogo3.jpeg',
+            'jogo7.jpeg',
+            'jogo1.jpeg',
+            'jogo2.jpeg'
+        ];
+
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let lockBoard = false;
+
+        function createMemoryGame() {
+            // Lista de fotos com verificação
+            const availablePhotos = memoryPhotos.filter(photo => {
+                try {
+                    // Verifica se a imagem existe
+                    const img = new Image();
+                    img.src = photo;
+                    return true;
+                } catch {
+                    console.warn('Foto não disponível:', photo);
+                    return false;
+                }
+            });
+
+            if (availablePhotos.length === 0) {
+                gameBoard.innerHTML = '<p>Nenhuma foto disponível para o jogo</p>';
+                return;
+            }
+
+            // Duplica as fotos disponíveis
+            const gamePhotos = [...availablePhotos, ...availablePhotos]
+                .sort(() => 0.5 - Math.random());
+
+            gameBoard.innerHTML = '';
+
+            gamePhotos.forEach((photo, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.photo = photo;
+                card.innerHTML = `
+            <div class="front">❤</div>
+            <div class="back"><img src="${photo}" alt="Foto do jogo" onerror="this.parentNode.innerHTML='<div class=\'front\'>❤</div><div class=\'back\'>Foto não encontrada</div>'"></div>
+        `;
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === flippedCards[0]) return;
+            if (this.classList.contains('matched')) return;
+
+            this.classList.add('flipped');
+            flippedCards.push(this);
+
+            if (flippedCards.length === 2) {
+                lockBoard = true;
+                setTimeout(checkMatch, 500);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const photo1 = card1.dataset.photo;
+            const photo2 = card2.dataset.photo;
+
+            if (photo1 === photo2) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+
+                if (matchedPairs === memoryPhotos.length) {
+                    setTimeout(() => {
+                        alert('Parabéns! Você encontrou todos os pares do nosso amor! ❤');
+                        createMemoryGame();
+                    }, 500);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+
+            flippedCards = [];
+            lockBoard = false;
+        }
+
+        createMemoryGame();
+
+        // Playlist
+        const songList = document.getElementById('songList');
+
+        // Músicas de exemplo (substitua pelas suas músicas)
+        const sampleSongs = [
+            { title: 'Duas metades', artist: 'Jorge & Mateus' },
+            { title: 'Prisão sem grade', artist: 'Jorge & Mateus' },
+            { title: 'Logo Eu', artist: 'Jorge & Mateus' },
+            { title: 'A Hora é Agora', artist: 'Jorge & Mateus' },
+            { title: 'A Droga do Amor', artist: 'Ari' },
+            { title: 'Vou voando', artist: 'Jorge & Mateus' },
+            { title: 'Nessas Horas', artist: 'Matheus & Kauan' },
+            { title: 'Tô com moral no Ceú!', artist: 'Matheus & Kauan' },
+            { title: 'Amo noite e Dia', artist: 'Jorge & Mateus' },
+            { title: 'De tanto te Querer', artist: 'Jorge & Mateus' },
+            { title: 'Aqueles Olhos', artist: 'Dom M' },
+            { title: 'Meu Desejo', artist: 'Jayro Vaqueiro' },
+            { title: 'Neve no Sertão', artist: 'Ramon e Randinho' },
+            { title: 'Caso Indefinido', artist: 'Cristiano Araújo' },
+            { title: 'Que sorte a nossa', artist: 'Matheus & Kauan' },
+            { title: 'Anos Luz', artist: 'Matuê' }
+
+        ];
+
+        function loadSongs() {
+            sampleSongs.forEach(song => {
+                addSongToPlaylist(song.title, song.artist);
+            });
+        }
+
+        function addSongToPlaylist(title, artist) {
+            const songElement = document.createElement('div');
+            songElement.className = 'song';
+            songElement.innerHTML = `
+        <div class="song-image">
+            <img src="spotify.png" alt="${title}">
+        </div>
+        <div class="song-info">
+            <div class="song-title">${title}</div>
+            <div class="song-artist">${artist}</div>
+        </div>
+    `;
+            songList.appendChild(songElement);
+        }
+
+        loadSongs();
+    </script>
+</body>
+
+</html>
